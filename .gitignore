@@ -1,0 +1,10 @@
+*.pdf
+*.eps
+gnuplottex_rus.log
+*.aux
+*.dvi
+*.gz
+*.backup
+*.gnuplot
+*fig*.tex
+
