@@ -1,0 +1,76 @@
+\documentclass[12pt]{article}
+
+% Подключаем всяко-разное, задаем кодировку, язык и прочие параметры по вкусу
+\usepackage[OT1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amssymb,amsfonts,textcomp,latexsym,pb-diagram,amsopn}
+\usepackage{cite,enumerate,float,indentfirst}
+\usepackage{graphicx,xcolor}
+
+% Порядку для задаем размер полей страницы, дальше это нам пригодится
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+
+% Включаем Gnuplottex
+\usepackage{gnuplottex}
+
+\begin{document}
+
+\section{Построение графиков Gnuplot в документе \LaTeX}
+
+\begin{figure}[h]
+ \centering
+ \begin{gnuplot}
+  set terminal epslatex color size 12cm,15cm  
+  set xzeroaxis lt -1
+  set yzeroaxis lt -1  
+  set style line 1 lt 1 lw 4 lc rgb '#4682b4' pt -1  
+  set style line 2 lt 1 lw 4 lc rgb '#aa0000' pt -1  
+  set grid ytics lc rgb '#555555' lw 1 lt 0
+  set grid xtics lc rgb '#555555' lw 1 lt 0  
+  set xrange [-3:3]  
+  plot x**3 title '$y = x^3$' ls 1, \  
+       x**4 title '$y = x^4$' ls 2
+ \end{gnuplot}
+ \caption{Пример построения двухмерных графиков}
+\end{figure}
+
+\begin{figure}[h]
+ \centering
+ \begin{gnuplot}
+  set terminal epslatex color size 12cm,12cm
+  splot x**2 + y**3 with pm3d title '$z = x^2 + y^3$'
+ \end{gnuplot}
+ \caption{Трехмерный график сеткой}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \begin{gnuplot}
+   set terminal epslatex color size 17cm,8cm
+   set xzeroaxis lt -1
+   set yzeroaxis lt -1
+   set xrange [0:20]
+   set style line 1 lt 1 lw 4 lc rgb '#4682b4' pt -1 
+   set style line 2 lt 1 lw 4 lc rgb '#ee0000' pt -1 
+   set style line 3 lt 1 lw 4 lc rgb '#008800' pt -1
+   set style line 4 lt 1 lw 4 lc rgb '#888800' pt -1
+   set style line 5 lt 1 lw 4 lc rgb '#00aaaa' pt -1
+   set style line 6 lt 1 lw 4 lc rgb '#cc0000' pt -1
+   set grid xtics lc rgb '#555555' lw 1 lt 0
+   set grid ytics lc rgb '#555555' lw 1 lt 0
+   set xlabel '$t$, c'
+   set ylabel '$P$, кН'
+   set key bottom right   
+   plot 'results/2319.log' using 1:3 with lines ls 2 ti '$P_2$', \
+	'results/2319.log' using 1:9 with lines ls 4 ti '$P_9$', \
+	'results/2319.log' using 1:19 with lines ls 5 ti '$P_{19}$',\
+	'results/2319.log' using 1:29 with lines ls 1 ti '$P_{29}$',\
+	'results/2319.log' using 1:49 with lines ls 3 ti '$P_{49}$', \
+	'results/2319.log' using 1:54 with lines ls 6 ti '$P_{53}$'	
+  \end{gnuplot}
+  \caption{Продольные силы в различных сечениях поезда}
+ \end{figure} 
+
+
+\end{document}
